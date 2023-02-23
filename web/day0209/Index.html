@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<!--   클래스라는 속성을 이용해서 css 지정 -->
+</head>
+
+<body style="background-color: bisque;"> <!-- 추가 설정이 없을 경우는 밑에 태그들은 해당 body태그를 따르게 된다.-->
+
+<form action="/day0209/logIn.html" method="post" style="text-align: center; position: absolute; align-items: ">
+<!--    % : 부모의 길의의 해당 퍼센트 만큼   rem : 1024px 1rem = 10.24 현재 길이의 1rem position: absolute 상대좌표 절대좌표-->
+
+    <input type="text" name="username" id="username" placeholder="아이디" class="form-control" style="margin-top: 40px; width: 200px; margin-left: 42%;"><br>
+
+    <input type="password" name="password" id="password" placeholder="비밀번호" class="form-control" style=" width: 200px; margin-left: 42%"><br>
+<!--    <button style="width: 200px; height: 30px; color: green; background-color: darkseagreen; border: aliceblue">로그인
+</button>-->
+<!--    <button type="button" class="btn btn-primary btn-lg">Large button</button>-->
+    <button type="button" class="btn btn-secondary btn-lg" style="width: 200px; margin-right: 80px; height: 50px">button</button>
+</form>
+
+</body>
+</html>
