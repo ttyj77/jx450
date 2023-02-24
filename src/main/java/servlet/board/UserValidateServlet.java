@@ -1,51 +1,47 @@
-package servlet;
+package servlet.board;
 
 import com.google.gson.JsonObject;
 import dbConn.ConnectionMaker;
 import dbConn.MysqlConnectionMaker;
 import dbController.UserController;
-import model.UserDto;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet(name = "AuthServlet", value = "/user/auth")
-public class AuthServlet extends HttpServlet {
+@WebServlet(name = "UserValidate", value = "/user/validate")
+public class UserValidateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ConnectionMaker connectionMaker = new MysqlConnectionMaker();
         UserController userController = new UserController(connectionMaker);
 
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        UserDto userDto = userController.auth(username, password);
-
-        JsonObject result = new JsonObject();
-        if (userDto != null) {
-            //session 접근
-            HttpSession session = request.getSession();
-            session.setAttribute("logIn", userDto);
-            result.addProperty("result", "success");
-
+        boolean result = userController.ValidateUsername(username);
+        String message;
+        if (result) {
+            message = "회원가입 가능";
         } else {
-            result.addProperty("result", "false");
+            message = "중복 된 아이디 입니다.";
         }
         PrintWriter writer = response.getWriter();
-        writer.print(result);
+
+        //json 형식으로 만들어서 넣어줘야 된다.
+        JsonObject object = new JsonObject();
+        object.addProperty("status", "200");
+        object.addProperty("result", result);
+        object.addProperty("message", message);
+
+        writer.print(object);
+
     }
+
 }

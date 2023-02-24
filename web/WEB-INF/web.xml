@@ -6,8 +6,8 @@
     <welcome-file-list>
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
-    <error-page>
-        <location>/assets/ErrorPage.jsp</location>
-    </error-page>
+<!--    <error-page>-->
+    <!--        &lt;!&ndash;        <location>/assets/ErrorPage.jsp</location>&ndash;&gt;-->
+    <!--    </error-page>-->
 
 </web-app>

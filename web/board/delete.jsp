@@ -20,9 +20,7 @@
 <body>
 <%
     UserDto logIn = (UserDto) session.getAttribute("logIn");
-    if (logIn == null) {
-        response.sendRedirect("/index.jsp"); //로그인을 안한경우
-    }
+
 
     int id = Integer.parseInt(request.getParameter("id")); //글삭제 눌렀으면 boardId 댓글삭제 눌렀으면 replyID
     ConnectionMaker connectionMaker = new MysqlConnectionMaker();

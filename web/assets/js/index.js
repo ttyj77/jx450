@@ -18,8 +18,8 @@ let auth = () => {
             if (result.result == 'success') {
                 location.href = "/board/printList.jsp";
             } else {
-                console.log("로그인 실패")
-                Swal.fire({title: '로그인 실패', text: result.message});
+                console.log("logIn fail")
+                Swal.fire({title: 'logIn fail', text: result.message});
             }
         }
     });

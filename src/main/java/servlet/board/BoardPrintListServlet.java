@@ -1,4 +1,4 @@
-package servlet;
+package servlet.board;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -27,14 +27,8 @@ public class BoardPrintListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-
-        HttpSession session = request.getSession();
-        UserDto logIn = (UserDto) session.getAttribute("logIn");
-
-        if (logIn == null) {
-            response.sendRedirect("/index.jsp");
-        }
 
         ConnectionMaker connectionMaker = new MysqlConnectionMaker();
         BoardController boardController = new BoardController(connectionMaker);
@@ -45,6 +39,8 @@ public class BoardPrintListServlet extends HttpServlet {
 
         int pageNo = Integer.parseInt(request.getParameter("pageNo"));
         ArrayList<BoardDTO> list = boardController.selectAll(pageNo);
+        int totalPage = boardController.countTotalPage();
+
         for (BoardDTO b : list) {
             JsonObject object = new JsonObject();
             object.addProperty("id", b.getId());
@@ -59,7 +55,7 @@ public class BoardPrintListServlet extends HttpServlet {
         JsonObject result = new JsonObject();
         result.addProperty("result", "success");
         result.addProperty("data", array.toString());
-
+        result.addProperty("totalPage", totalPage);
 
         PrintWriter writer = response.getWriter();
         writer.println(result);

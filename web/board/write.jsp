@@ -16,9 +16,7 @@
 <script src="/assets/js%20library/build/ckeditor.js"></script>
 <%
     UserDto logIn = (UserDto) session.getAttribute("logIn");
-    if (logIn == null) {
-        response.sendRedirect("/index.jsp");
-    }
+
 %>
 <title> 글 작성하기</title>
 
